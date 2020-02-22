@@ -1,17 +1,13 @@
-import React, { Fragment } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './results.css';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
+import { Divider, List, ListItem, ListItemText } from '@material-ui/core';
 import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { ListItem, ListItemText, List, ListItemIcon, Divider } from '@material-ui/core';
-import { toxins, addedSugars, gluten, nuts, vegan, vegitarian, lables } from './data.js';
+import React, { Fragment } from 'react';
+import { addedSugars, gluten, nuts, toxins, vegan, vegitarian, labels } from "../Data/data";
+import '../Styles/styles.css';
 
 //let ingredients = "INGREDIENTS: INGREDIENTS: WHOLE CORN, SUNFLOWER AND/OR CANOLA OIL, WHOLE WHEAT, BROWN RICE FLOUR, WHOLE OAT FLOUR, SUGAR, TOMATO POWDER, SALT, NATURAL FLAVORS, MALTODEXTRIN (MADE FROM CORN), CHEDDAR CHEESE (MILK, CHEESE CULTURES, SALT, ENZYMES), DEXTROSE, BUTTERMILK, ONION POWDER, WHEY, YEAST EXTRACT, ROMANO CHEESE (PART-SKIM COW'S MILK, CHEESE CULTURES, SALT, ENZYMES), WHEY PROTEIN CONCENTRATE, CORN OIL, SPICES (INCLUDING JALAPEÑO PEPPER), CITRIC ACID, PAPRIKA EXTRACTS, AND LACTIC ACID. CONTAINS WHEAT AND MILK INGREDIENTS.";
 
@@ -128,7 +124,7 @@ const Results: React.FunctionComponent<ResultsProps> = ({ userChecks, ingredient
                                                 id="panel1a-header"
                                                 className="dark"
                                             >
-                                                <Typography className="smallMargin" variant="h6" >{lables[i] + " " + item.length}</Typography>
+                                                <Typography className="smallMargin" variant="h6" >{labels[i] + " " + item.length}</Typography>
                                             </ExpansionPanelSummary>
                                             <Divider />
                                             <ExpansionPanelDetails className="smallPadding">

@@ -1,21 +1,15 @@
+import { AppBar, Container, Drawer, IconButton, Toolbar, Typography } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 import React, { Fragment } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './results.css';
-import Results from './results';
-import { Container, AppBar, Toolbar, IconButton, Typography, Button, List, ListItem, ListItemIcon, ListItemText, Divider, Drawer } from '@material-ui/core';
-import { styles } from "./Styles";
-import { THEME } from "./Styles/theme";
-import SettingsIcon from '@material-ui/icons/Settings'
-import Settings from "./settings";
-import { checks } from "./data";
+import { checks } from "../Data/data";
+import Results from './Results';
+import Settings from "./Settings";
+import '../Styles/styles.css';
 
 const itemName = "Sun Chips Garden Salsa";
 const ingredients = "INGREDIENTS: INGREDIENTS: WHOLE CORN, SUNFLOWER AND/OR CANOLA OIL, WHOLE WHEAT, BROWN RICE FLOUR, WHOLE OAT FLOUR, SUGAR, TOMATO POWDER, SALT, NATURAL FLAVORS, MALTODEXTRIN (MADE FROM CORN), CHEDDAR CHEESE (MILK, CHEESE CULTURES, SALT, ENZYMES), DEXTROSE, BUTTERMILK, ONION POWDER, WHEY, YEAST EXTRACT, ROMANO CHEESE (PART-SKIM COW'S MILK, CHEESE CULTURES, SALT, ENZYMES), WHEY PROTEIN CONCENTRATE, CORN OIL, SPICES (INCLUDING JALAPEÑO PEPPER), CITRIC ACID, PAPRIKA EXTRACTS, AND LACTIC ACID. CONTAINS WHEAT AND MILK INGREDIENTS.";
 
 const App: React.FunctionComponent = () => {
-  const classes = styles(THEME);
-
   const [userChecks, setChecks] = React.useState<boolean[]>(checks);
   const [drawer, setDrawer] = React.useState({ left: false })
 

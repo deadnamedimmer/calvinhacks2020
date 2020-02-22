@@ -1,17 +1,7 @@
+import { Checkbox, List, ListItem, ListItemIcon, ListItemText } from '@material-ui/core';
 import React, { Fragment } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import './results.css';
-import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import ButtonBase from '@material-ui/core/ButtonBase';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { ListItem, ListItemText, List, ListItemIcon, Divider, Card, Checkbox, ListItemSecondaryAction, IconButton } from '@material-ui/core';
-import { toxins, addedSugars, gluten, nuts, vegan, vegitarian, categories } from './data.js';
+import { categories } from '../Data/data';
+import '../Styles/styles.css';
 
 const capitalize = (s: string) => {
     return s.charAt(0).toUpperCase() + s.slice(1)
