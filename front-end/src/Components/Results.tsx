@@ -140,15 +140,7 @@ const Results: React.FunctionComponent<ResultsProps> = ({
 
   let allPositives = findAllPositives();
 
-  const icons = [
-    "skull.png",
-    "sugar.png",
-    "wheat.png",
-    "nuts.png",
-    "vegan.png",
-    "veg.png",
-    "oil.png"
-  ];
+  const icons = ["skull", "sugar", "wheat", "nuts", "vegan", "veg", "oil"];
 
   return (
     <Fragment>
@@ -180,7 +172,12 @@ const Results: React.FunctionComponent<ResultsProps> = ({
                           className="dark"
                         >
                           <img
-                            src={"/Icons/" + icons[i]}
+                            src={
+                              "/Icons/" +
+                              icons[i] +
+                              (item.length != 0 ? "-red" : "") +
+                              ".png"
+                            }
                             height="25px"
                             style={{ paddingRight: "5px" }}
                           ></img>
