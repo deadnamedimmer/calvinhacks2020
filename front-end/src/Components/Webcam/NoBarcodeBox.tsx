@@ -14,15 +14,17 @@ declare interface NoBarcodeBoxProps {
   open: boolean;
   handleClose: () => void;
   imageSrc: string;
+  processing: boolean;
+  setProcessing: (processing: boolean) => void;
 }
 
 const NoBarcodeBox: React.FunctionComponent<NoBarcodeBoxProps> = ({
   open,
   handleClose,
-  imageSrc
+  imageSrc,
+  processing,
+  setProcessing
 }) => {
-  const [processing, setProcessing] = React.useState(false);
-
   const handleProcessing = (imageSrc: string) => {
     setProcessing(true);
     // Google Vision API call for text analysis
@@ -50,7 +52,9 @@ const NoBarcodeBox: React.FunctionComponent<NoBarcodeBoxProps> = ({
       aria-labelledby="no-barcode-dialog-title"
       aria-describedby="no-barcode-description"
     >
-      <DialogTitle id="no-barcode-title">No Barcode Found!</DialogTitle>
+      <DialogTitle id="no-barcode-title">
+        {processing ? "Processing" : "No Barcode Found!"}
+      </DialogTitle>
       {!processing && (
         <Fragment>
           <DialogContent>

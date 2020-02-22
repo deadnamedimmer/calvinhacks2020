@@ -194,7 +194,10 @@ const Results: React.FunctionComponent<ResultsProps> = ({
                             {item.map((item: string, i: number) => {
                               displayed = true;
                               return (
-                                <ListItem className="smallPadding">
+                                <ListItem
+                                  className="smallPadding"
+                                  key={capitalize(item)}
+                                >
                                   <ListItemText
                                     className="smallPadding"
                                     primary={capitalize(item)}

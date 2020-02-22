@@ -15,11 +15,7 @@ import Settings from "./Settings";
 import "../Styles/styles.css";
 import WebcamCapture from "./Webcam/Webcam";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
-
-const itemName = "Sun Chips Garden Salsa";
-const ingredients =
-  "INGREDIENTS: INGREDIENTS: WHOLE CORN, SUNFLOWER AND/OR CANOLA OIL, WHOLE WHEAT, BROWN RICE FLOUR, WHOLE OAT FLOUR, SUGAR, TOMATO POWDER, SALT, NATURAL FLAVORS, MALTODEXTRIN (MADE FROM CORN), CHEDDAR CHEESE (MILK, CHEESE CULTURES, SALT, ENZYMES), DEXTROSE, BUTTERMILK, ONION POWDER, WHEY, YEAST EXTRACT, ROMANO CHEESE (PART-SKIM COW'S MILK, CHEESE CULTURES, SALT, ENZYMES), WHEY PROTEIN CONCENTRATE, CORN OIL, SPICES (INCLUDING JALAPEÑO PEPPER), CITRIC ACID, PAPRIKA EXTRACTS, AND LACTIC ACID. CONTAINS WHEAT AND MILK INGREDIENTS.";
-const upcCode = "0-00000-00000-0";
+import { getIngredientsUPC } from "../Scripts/upc";
 
 const Main: React.FunctionComponent = () => {
   const [userChecks, setChecks] = React.useState<boolean[]>(checks);
@@ -29,6 +25,7 @@ const Main: React.FunctionComponent = () => {
     width: window.innerWidth,
     height: window.innerHeight
   });
+  const [upcData, setUpcData] = React.useState<UPCData | null>(null);
 
   const handleSelect = (i: number) => {
     const newChecks: boolean[] = userChecks.slice();
@@ -52,10 +49,6 @@ const Main: React.FunctionComponent = () => {
     setDrawer({ ...drawer, [side]: open });
   };
 
-  const handleOpenResults = () => {
-    setResultsOpen(true);
-  };
-
   const handleCloseResults = () => {
     setResultsOpen(false);
   };
@@ -70,8 +63,13 @@ const Main: React.FunctionComponent = () => {
     <Fragment>
       <AppBar position="fixed">
         <Toolbar>
-          <IconButton edge="start" color="inherit" aria-label="menu">
-            <SettingsIcon onClick={toggleDrawer("left", true)} />
+          <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            onClick={toggleDrawer("left", true)}
+          >
+            <SettingsIcon />
           </IconButton>
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Food Sleuth
@@ -81,34 +79,35 @@ const Main: React.FunctionComponent = () => {
       <Drawer open={drawer.left} onClose={toggleDrawer("left", false)}>
         <Settings handleSelect={handleSelect} userChecks={userChecks} />
       </Drawer>
-      {resultsOpen && (
-        <Fab
-          color="primary"
-          aria-label="New scan"
-          style={{ position: "absolute", bottom: "20px", right: "20px" }}
-          onClick={() => {
-            handleCloseResults();
-          }}
-        >
-          <CameraAltIcon />
-        </Fab>
-      )}
       {!resultsOpen && (
         <WebcamCapture
-          handleOpenResults={handleOpenResults}
           width={screenSize.width}
           height={screenSize.height}
+          setResultsOpen={setResultsOpen}
+          setUpcData={setUpcData}
         />
       )}
       {resultsOpen && (
-        <Container className="app">
-          <Results
-            userChecks={userChecks}
-            ingredients={ingredients}
-            itemName={itemName}
-            upcCode={upcCode}
-          />
-        </Container>
+        <Fragment>
+          <Container className="app">
+            <Results
+              userChecks={userChecks}
+              ingredients={upcData ? upcData.ingredients : ""}
+              itemName={upcData ? upcData.item : ""}
+              upcCode={upcData ? upcData.upc : ""}
+            />
+          </Container>
+          <Fab
+            color="primary"
+            aria-label="New scan"
+            style={{ position: "absolute", bottom: "20px", right: "20px" }}
+            onClick={() => {
+              handleCloseResults();
+            }}
+          >
+            <CameraAltIcon />
+          </Fab>
+        </Fragment>
       )}
     </Fragment>
   );
