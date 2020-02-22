@@ -5,7 +5,8 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  Fab
+  Fab,
+  Button
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import React, { Fragment } from "react";
@@ -15,6 +16,7 @@ import Settings from "./Settings";
 import "../Styles/styles.css";
 import WebcamCapture from "./Webcam/Webcam";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
+import FlipCameraAndroidIcon from "@material-ui/icons/FlipCameraAndroid";
 
 const itemName = "Sun Chips Garden Salsa";
 const ingredients =
@@ -76,23 +78,30 @@ const Main: React.FunctionComponent = () => {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Food Sleuth
           </Typography>
+          {resultsOpen ? (
+            <Button
+              disableRipple={false}
+              style={{ color: "#FFFFFF" }}
+              onClick={() => {
+                handleCloseResults();
+              }}
+            >
+              <CameraAltIcon />
+            </Button>
+          ) : (
+            <Button
+              disableRipple={false}
+              style={{ color: "#FFFFFF" }}
+              onClick={() => {}}
+            >
+              <FlipCameraAndroidIcon />
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer open={drawer.left} onClose={toggleDrawer("left", false)}>
         <Settings handleSelect={handleSelect} userChecks={userChecks} />
       </Drawer>
-      {resultsOpen && (
-        <Fab
-          color="primary"
-          aria-label="New scan"
-          style={{ position: "absolute", bottom: "20px", right: "20px" }}
-          onClick={() => {
-            handleCloseResults();
-          }}
-        >
-          <CameraAltIcon />
-        </Fab>
-      )}
       {!resultsOpen && (
         <WebcamCapture
           handleOpenResults={handleOpenResults}
@@ -107,6 +116,7 @@ const Main: React.FunctionComponent = () => {
             ingredients={ingredients}
             itemName={itemName}
             upcCode={upcCode}
+            handleCloseResults={handleCloseResults}
           />
         </Container>
       )}
