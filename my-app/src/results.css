@@ -1,0 +1,46 @@
+.smallMargin {
+    /*margin-top: 0% !important;
+    margin-bottom: 0% !important;*/
+}
+
+.smallPadding {
+    padding-bottom: 0% !important;
+    padding-top: 0% !important;
+    background-color: #636363 !important;
+    color: #d8d8d8 !important;
+    border-radius: 5px;
+}
+
+.margin {
+    margin-bottom: 2% !important;
+}
+
+.results {
+    margin-top: 2%;
+}
+
+.dark {
+    background-color: #636363 !important;
+    color: #d8d8d8 !important;
+    border-radius: 5px !important;
+}
+
+.darkResults {
+    margin-top: 2%;
+    background-color: #636363 !important;
+    color: #d8d8d8 !important;
+    border-radius: 5px !important;
+}
+
+.secondaryButton {
+    color: #9ccc65 !important;
+}
+
+.jDark {
+    background-color: #636363 !important;
+    color: #d8d8d8 !important;
+}
+
+.MuiDrawer-paper {
+    background-color: #636363 !important;
+}
