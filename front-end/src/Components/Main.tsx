@@ -5,7 +5,8 @@ import {
   IconButton,
   Toolbar,
   Typography,
-  Fab
+  Fab,
+  Button
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import React, { Fragment } from "react";
@@ -16,6 +17,7 @@ import "../Styles/styles.css";
 import WebcamCapture from "./Webcam/Webcam";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import { getIngredientsUPC } from "../Scripts/upc";
+import FlipCameraAndroidIcon from "@material-ui/icons/FlipCameraAndroid";
 
 const Main: React.FunctionComponent = () => {
   const [userChecks, setChecks] = React.useState<boolean[]>(checks);
@@ -74,6 +76,25 @@ const Main: React.FunctionComponent = () => {
           <Typography variant="h6" style={{ flexGrow: 1 }}>
             Food Sleuth
           </Typography>
+          {resultsOpen ? (
+            <Button
+              disableRipple={false}
+              style={{ color: "#FFFFFF" }}
+              onClick={() => {
+                handleCloseResults();
+              }}
+            >
+              <CameraAltIcon />
+            </Button>
+          ) : (
+            <Button
+              disableRipple={false}
+              style={{ color: "#FFFFFF" }}
+              onClick={() => {}}
+            >
+              <FlipCameraAndroidIcon />
+            </Button>
+          )}
         </Toolbar>
       </AppBar>
       <Drawer open={drawer.left} onClose={toggleDrawer("left", false)}>

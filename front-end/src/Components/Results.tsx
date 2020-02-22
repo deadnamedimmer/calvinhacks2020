@@ -7,7 +7,8 @@ import {
   List,
   ListItem,
   ListItemText,
-  Typography
+  Typography,
+  Fab
 } from "@material-ui/core";
 import React, { Fragment } from "react";
 import {
@@ -22,6 +23,7 @@ import {
 } from "../Data/data";
 import "../Styles/styles.css";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import CameraAltIcon from "@material-ui/icons/CameraAlt";
 
 //let ingredients = "INGREDIENTS: INGREDIENTS: WHOLE CORN, SUNFLOWER AND/OR CANOLA OIL, WHOLE WHEAT, BROWN RICE FLOUR, WHOLE OAT FLOUR, SUGAR, TOMATO POWDER, SALT, NATURAL FLAVORS, MALTODEXTRIN (MADE FROM CORN), CHEDDAR CHEESE (MILK, CHEESE CULTURES, SALT, ENZYMES), DEXTROSE, BUTTERMILK, ONION POWDER, WHEY, YEAST EXTRACT, ROMANO CHEESE (PART-SKIM COW'S MILK, CHEESE CULTURES, SALT, ENZYMES), WHEY PROTEIN CONCENTRATE, CORN OIL, SPICES (INCLUDING JALAPEÑO PEPPER), CITRIC ACID, PAPRIKA EXTRACTS, AND LACTIC ACID. CONTAINS WHEAT AND MILK INGREDIENTS.";
 
@@ -32,13 +34,15 @@ interface ResultsProps {
 
   itemName: string;
   upcCode: string;
+  handleCloseResults: Function;
 }
 
 const Results: React.FunctionComponent<ResultsProps> = ({
   userChecks,
   ingredients,
   itemName,
-  upcCode
+  upcCode,
+  handleCloseResults
 }) => {
   const capitalize = (s: String) => {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -140,21 +144,17 @@ const Results: React.FunctionComponent<ResultsProps> = ({
 
   let allPositives = findAllPositives();
 
-  const icons = [
-    "skull.png",
-    "sugar.png",
-    "wheat.png",
-    "nuts.png",
-    "vegan.png",
-    "veg.png",
-    "oil.png"
-  ];
+  const icons = ["skull", "sugar", "wheat", "nuts", "vegan", "veg", "oil"];
 
   return (
     <Fragment>
-      <Typography variant="h4" className="margin">
-        .
-      </Typography>
+      <Fab
+        color="primary"
+        aria-label="New scan"
+        className="fab"
+      >
+        <CameraAltIcon />
+      </Fab>
       <div className="results">
         <Typography variant="h4" className="results">
           {itemName}
@@ -180,7 +180,12 @@ const Results: React.FunctionComponent<ResultsProps> = ({
                           className="dark"
                         >
                           <img
-                            src={"/Icons/" + icons[i]}
+                            src={
+                              "/Icons/" +
+                              icons[i] +
+                              (item.length != 0 ? "-red" : "") +
+                              ".png"
+                            }
                             height="25px"
                             style={{ paddingRight: "5px" }}
                           ></img>
