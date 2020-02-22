@@ -4,7 +4,8 @@ import {
   Drawer,
   IconButton,
   Toolbar,
-  Typography
+  Typography,
+  Fab
 } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import React, { Fragment } from "react";
@@ -13,10 +14,12 @@ import Results from "./Results";
 import Settings from "./Settings";
 import "../Styles/styles.css";
 import WebcamCapture from "./Webcam/Webcam";
+import CameraAltIcon from "@material-ui/icons/CameraAlt";
 
 const itemName = "Sun Chips Garden Salsa";
 const ingredients =
   "INGREDIENTS: INGREDIENTS: WHOLE CORN, SUNFLOWER AND/OR CANOLA OIL, WHOLE WHEAT, BROWN RICE FLOUR, WHOLE OAT FLOUR, SUGAR, TOMATO POWDER, SALT, NATURAL FLAVORS, MALTODEXTRIN (MADE FROM CORN), CHEDDAR CHEESE (MILK, CHEESE CULTURES, SALT, ENZYMES), DEXTROSE, BUTTERMILK, ONION POWDER, WHEY, YEAST EXTRACT, ROMANO CHEESE (PART-SKIM COW'S MILK, CHEESE CULTURES, SALT, ENZYMES), WHEY PROTEIN CONCENTRATE, CORN OIL, SPICES (INCLUDING JALAPEÑO PEPPER), CITRIC ACID, PAPRIKA EXTRACTS, AND LACTIC ACID. CONTAINS WHEAT AND MILK INGREDIENTS.";
+const upcCode = "0-00000-00000-0";
 
 const Main: React.FunctionComponent = () => {
   const [userChecks, setChecks] = React.useState<boolean[]>(checks);
@@ -78,6 +81,18 @@ const Main: React.FunctionComponent = () => {
       <Drawer open={drawer.left} onClose={toggleDrawer("left", false)}>
         <Settings handleSelect={handleSelect} userChecks={userChecks} />
       </Drawer>
+      {resultsOpen && (
+        <Fab
+          color="primary"
+          aria-label="New scan"
+          style={{ position: "absolute", bottom: "20px", right: "20px" }}
+          onClick={() => {
+            handleCloseResults();
+          }}
+        >
+          <CameraAltIcon />
+        </Fab>
+      )}
       {!resultsOpen && (
         <WebcamCapture
           handleOpenResults={handleOpenResults}
@@ -91,6 +106,7 @@ const Main: React.FunctionComponent = () => {
             userChecks={userChecks}
             ingredients={ingredients}
             itemName={itemName}
+            upcCode={upcCode}
           />
         </Container>
       )}

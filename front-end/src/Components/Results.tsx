@@ -17,7 +17,8 @@ import {
   nuts,
   toxins,
   vegan,
-  vegitarian
+  vegitarian,
+  oils
 } from "../Data/data";
 import "../Styles/styles.css";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
@@ -30,12 +31,14 @@ interface ResultsProps {
   ingredients: string;
 
   itemName: string;
+  upcCode: string;
 }
 
 const Results: React.FunctionComponent<ResultsProps> = ({
   userChecks,
   ingredients,
-  itemName
+  itemName,
+  upcCode
 }) => {
   const capitalize = (s: String) => {
     return s.charAt(0).toUpperCase() + s.slice(1);
@@ -101,13 +104,24 @@ const Results: React.FunctionComponent<ResultsProps> = ({
     return addedVegitarianPositives;
   }
 
+  function checkOilPositives() {
+    let addedOilPositives: string[] = [];
+    for (const val of oils) {
+      if (ingredients.toLowerCase().indexOf(val.toLowerCase()) >= 0) {
+        addedOilPositives.push(val);
+      }
+    }
+    return addedOilPositives;
+  }
+
   let functions = [
     checkToxinPositives,
     checkAddedSugarsPositives,
     checkGlutenPositives,
     checkNutsPositives,
     checkVeganPositives,
-    checkVegitarianPositives
+    checkVegitarianPositives,
+    checkOilPositives
   ];
 
   function findAllPositives() {
@@ -126,11 +140,27 @@ const Results: React.FunctionComponent<ResultsProps> = ({
 
   let allPositives = findAllPositives();
 
+  const icons = [
+    "skull.png",
+    "sugar.png",
+    "wheat.png",
+    "nuts.png",
+    "vegan.png",
+    "veg.png",
+    "oil.png"
+  ];
+
   return (
     <Fragment>
+      <Typography variant="h4" className="margin">
+        .
+      </Typography>
       <div className="results">
-        <Typography variant="h4" className="margin">
+        <Typography variant="h4" className="results">
           {itemName}
+        </Typography>
+        <Typography variant="subtitle1" className="margin">
+          {upcCode}
         </Typography>
         <Grid container spacing={3} direction="column" className="maxHeight">
           {allPositives.map((item: any, i: number) => {
@@ -149,6 +179,11 @@ const Results: React.FunctionComponent<ResultsProps> = ({
                           id="panel1a-header"
                           className="dark"
                         >
+                          <img
+                            src={"/Icons/" + icons[i]}
+                            height="25px"
+                            style={{ paddingRight: "5px" }}
+                          ></img>
                           <Typography className="smallMargin" variant="h6">
                             {labels[i] + " " + item.length}
                           </Typography>
